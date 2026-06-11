@@ -69,10 +69,19 @@ npm run dev
 
 `.env.example` files are included with Arcline dev credentials. Copy them to `.env` to use. Frontend must run on port **3000** or **5173**.
 
+## Corporate Standards (IMPORTANT)
+
+**Before planning or developing any feature, always check the `docs/` folder first.** It contains markdown files with corporate standards and patterns for application features. Search for relevant docs matching the feature you are working on and follow those standards. This applies to all work — new features, refactors, bug fixes, and architecture decisions.
+
 ## Adding Features
 
-See the `arcline-app-framework` documentation for patterns:
+See the `docs/` folder for Arcline corporate standard patterns:
 - File uploads with progress
 - Column mapping for Excel files
 - Formatted Excel exports
 - Embedded app integration (iframe)
+- API architecture conventions
+- MSAL authentication setup
+- UX design and branding
+- Role-based security
+- And more — always check `docs/` for applicable guidance
