@@ -1,0 +1,89 @@
+import { useTheme } from './components/theme-provider'
+import { useAuth } from './hooks/useAuth'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
+import { Moon, Sun } from 'lucide-react'
+
+function App() {
+  const { resolvedTheme, setTheme } = useTheme()
+  const { isAuthenticated, login, logout, getUser } = useAuth()
+  const user = getUser()
+
+  // Login page
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex justify-center items-center px-4">
+        <Card className="w-full max-w-md">
+          <CardContent className="pt-8 pb-8 text-center space-y-6">
+            <div className="flex justify-center">
+              <img
+                src={resolvedTheme === 'dark' ? '/Arcline-Logo-White.svg' : '/Arcline-Logo-Black.svg'}
+                alt="Arcline"
+                className="h-12"
+              />
+            </div>
+            <div>
+              <CardTitle className="text-2xl text-primary">App Name</CardTitle>
+              <CardDescription className="mt-2">Sign in to continue</CardDescription>
+            </div>
+            <Button onClick={login} size="lg" className="w-full">
+              Sign in with Microsoft
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // Main application
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+        <div className="container mx-auto flex h-14 items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <img
+              src={resolvedTheme === 'dark' ? '/Arcline-Logo-White.svg' : '/Arcline-Logo-Black.svg'}
+              alt="Arcline"
+              className="h-8"
+            />
+            <div className="h-8 w-px bg-border"></div>
+            <h1 className="text-xl font-semibold text-foreground">App Name</h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+            {user && (
+              <span className="text-sm text-muted-foreground hidden md:block">{user.name}</span>
+            )}
+            <Button variant="outline" size="sm" onClick={logout}>
+              Logout
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 w-full">
+        <div className="container mx-auto px-4 py-8">
+          <Card>
+            <CardContent className="pt-6">
+              <h2 className="text-lg font-semibold mb-2">Welcome, {user?.name}</h2>
+              <p className="text-muted-foreground">
+                Your application is ready. Start building your features here.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+export default App
