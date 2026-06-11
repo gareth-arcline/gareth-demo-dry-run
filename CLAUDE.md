@@ -38,6 +38,8 @@ cd ../backend && python -m venv venv && venv/bin/pip install -r requirements.txt
 
 ## Running the App
 
+**DO NOT start or stop any services (frontend or backend) without explicit user approval.** The user manages all service lifecycle manually.
+
 **Backend** (port 8000):
 ```bash
 cd backend
