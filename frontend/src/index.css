@@ -15,6 +15,10 @@
   --color-accent-foreground: #234948;
   --color-destructive: #dc2626;
   --color-destructive-foreground: #ffffff;
+  --color-success: #10b981;
+  --color-success-foreground: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #ffffff;
   --color-border: #D9D9D9;
   --color-input: #D9D9D9;
   --color-ring: #234948;
@@ -51,6 +55,10 @@
     --color-accent-foreground: #f0f7f7;
     --color-destructive: #ef4444;
     --color-destructive-foreground: #ffffff;
+    --color-success: #10b981;
+    --color-success-foreground: #ffffff;
+    --color-warning: #f59e0b;
+    --color-warning-foreground: #ffffff;
     --color-border: #2d4d4c;
     --color-input: #2d4d4c;
     --color-ring: #3d7c79;

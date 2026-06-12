@@ -27,21 +27,25 @@ export function useAuth() {
 
   const getAccessToken = async () => {
     if (!account) return null;
-    try {
-      const response = await instance.acquireTokenSilent({
-        ...apiRequest,
-        account: account,
-      });
-      return response.accessToken;
-    } catch (error) {
-      console.error("Token acquisition failed:", error);
+    // Try API scope first, fall back to login scope
+    for (const request of [apiRequest, loginRequest]) {
       try {
-        await instance.acquireTokenRedirect(apiRequest);
-      } catch (redirectError) {
-        console.error("Token redirect failed:", redirectError);
+        const response = await instance.acquireTokenSilent({
+          ...request,
+          account: account,
+        });
+        return response.accessToken;
+      } catch {
+        // try next scope
       }
-      return null;
     }
+    // All silent attempts failed, redirect
+    try {
+      await instance.acquireTokenRedirect(apiRequest);
+    } catch (redirectError) {
+      console.error("Token redirect failed:", redirectError);
+    }
+    return null;
   };
 
   const getUser = () => {

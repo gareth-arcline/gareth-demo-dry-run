@@ -3,6 +3,7 @@ import { useAuth } from './hooks/useAuth'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import { Moon, Sun } from 'lucide-react'
+import NoteSummarizer from './components/note-summarizer/NoteSummarizer'
 
 function App() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -23,7 +24,7 @@ function App() {
               />
             </div>
             <div>
-              <CardTitle className="text-2xl text-primary">App Name</CardTitle>
+              <CardTitle className="text-2xl text-primary">Notes Summarizer</CardTitle>
               <CardDescription className="mt-2">Sign in to continue</CardDescription>
             </div>
             <Button onClick={login} size="lg" className="w-full">
@@ -48,7 +49,7 @@ function App() {
               className="h-8"
             />
             <div className="h-8 w-px bg-border"></div>
-            <h1 className="text-xl font-semibold text-foreground">App Name</h1>
+            <h1 className="text-xl font-semibold text-foreground">Notes Summarizer</h1>
           </div>
           <div className="flex items-center gap-4">
             <Button
@@ -72,14 +73,7 @@ function App() {
       {/* Main Content */}
       <main className="flex-1 w-full">
         <div className="container mx-auto px-4 py-8">
-          <Card>
-            <CardContent className="pt-6">
-              <h2 className="text-lg font-semibold mb-2">Welcome, {user?.name}</h2>
-              <p className="text-muted-foreground">
-                Your application is ready. Start building your features here.
-              </p>
-            </CardContent>
-          </Card>
+          <NoteSummarizer />
         </div>
       </main>
     </div>

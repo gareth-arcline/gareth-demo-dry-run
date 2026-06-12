@@ -20,13 +20,16 @@
 ### 1f. Start backend and frontend
 ```Give me the commands to run from ./backend and ./frontend to manually start the services, I will start and stop all services - update your Claude file prohibiting you from starting or stopping services without explicit approval.```
 
-## 2a. Starting Prompt
-I want to create a notes summarizer. This will be an AI enabled app, but lets start by building out the user interface, workflows, and front end before integrating the LLM. Use randomly generated text as a placeholder for AI generated text outputs. The user workflow will be:
-1.User uploads a set of notes files – use the .md file “File-Upload-Progress-Pattern” and have ability to drag and drop multiple files into a landing zone. It should accept emails, powerpoints, docs, text files, etc.
-2.User then provides a prompt to the LLM that outlines in a couple bullets the themes they want to cover in the notes
-3.LLM is passed a system prompt along with the user input and the provided raw notes files and generates an outline of the finalized notes.
-4.The user then has an interactive way to drag and drop topics, delete topics or combine topics, or add their own, or provide a different prompt and have the notes summarizer re-generate or adjust the outline
-5.Once the outline is finalized, the user can press a button to generate and the LLM will get called again to summarize all the raw notes files into the outline
-6.User can then download the finished doc into .docx format.
-I’ve uploaded some examples of 3 sets of notes that were consolidated into one set. The raw files are in the folder with the label “raw” in the beginning of the file name, and the final one says “final” in the filename. Please develop a plan to implement this so I can test the UI and workflow before adding in the AI integration. Before you proceed on implementation, clarify any questions you may have on the user workflow, UX design, backend design, etc.
+### 1g.  Establish the env files
+```Copy the front and backend env files from the example files```
+
+## 2a. Starting Prompt **PLANNING MODE**
+I want to create a notes summarizer built on the existing template code. This will be an AI enabled app, but lets start by building out the user interface, workflows, and front end before integrating the LLM. Use randomly generated text as a placeholder for AI generated text outputs. The user workflow will be:
+1. User uploads a set of notes files – use the .md file “File-Upload-Progress-Pattern” and have ability to drag and drop multiple files into a landing zone. It should accept emails, powerpoints, docs, text files, etc.
+2. User then provides a prompt to the LLM that outlines in a couple bullets the themes they want to cover in the notes
+3. LLM is passed a system prompt along with the user input and the provided raw notes files and generates an outline of the finalized notes.
+4. The user then has an interactive way to drag and drop topics, delete topics or combine topics, or add their own, or provide a different prompt and have the notes summarizer re-generate or adjust the outline
+5. Once the outline is finalized, the user can press a button to generate and the LLM will get called again to summarize all the raw notes files into the outline
+6. User can then download the finished doc into .docx format.
+I’ve uploaded some examples of 3 sets of notes in the samples folder that were consolidated into one set. The raw files are in the folder with the label “raw” in the beginning of the file name, and the final one says “final” in the filename. Please develop a plan to implement this so I can test the UI and workflow before adding in the AI integration. Before you proceed on implementation, clarify any questions you may have on the user workflow, UX design, backend design, etc.
 

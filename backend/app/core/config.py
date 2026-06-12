@@ -8,6 +8,10 @@ class Settings(BaseSettings):
     AZURE_TENANT_ID: str = ""
     ALLOWED_GROUPS: Optional[str] = None
 
+    # File Upload
+    UPLOAD_FOLDER: str = "./uploads"
+    MAX_UPLOAD_SIZE_MB: int = 50
+
     # CORS
     CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
 

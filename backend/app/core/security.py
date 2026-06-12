@@ -12,8 +12,15 @@ security = HTTPBearer()
 def get_jwks():
     """Fetch Microsoft's public keys for token validation."""
     jwks_url = f"https://login.microsoftonline.com/{settings.AZURE_TENANT_ID}/discovery/v2.0/keys"
-    response = httpx.get(jwks_url)
-    return response.json()
+    try:
+        response = httpx.get(jwks_url, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Failed to fetch Azure AD keys: {str(e)}"
+        )
 
 def get_public_key(token: str):
     """Get the public key for the token's key ID."""
@@ -38,11 +45,16 @@ async def get_current_user(
 
     try:
         public_key = get_public_key(token)
+        # Accept both the client ID and api:// URI as valid audiences
+        valid_audiences = [
+            settings.AZURE_CLIENT_ID,
+            f"api://{settings.AZURE_CLIENT_ID}",
+        ]
         payload = jwt.decode(
             token,
             public_key,
             algorithms=["RS256"],
-            audience=settings.AZURE_CLIENT_ID,
+            audience=valid_audiences,
             issuer=f"https://sts.windows.net/{settings.AZURE_TENANT_ID}/"
         )
     except jwt.ExpiredSignatureError:
